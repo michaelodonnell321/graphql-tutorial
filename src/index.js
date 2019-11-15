@@ -3,11 +3,33 @@ const { GraphQLServer } = require('graphql-yoga');
 const typeDefs = `
 type Query {
     info: String!
+    feed: [Link!]!
+}
+
+type Link {
+    id: ID!
+    description: String!
+    url: String!
 }`
 
+//dummy data
+let links = [{
+    id: 'link-0',
+    url: 'www.howtographql.com',
+    description: 'Full stack GraphQL tutorial'
+}]
+
 const resolvers = {
+    //resolver needed for each typedef
+    //name needs to match
     Query: {
-        info: () => `This is the API for a Hackernews Clone`
+        info: () => 'This is the API for the Hackernews Clone',
+        feed: () => links,
+    },
+    Link: {
+        id: (parent) => parent.id,
+        description: (parent) => parent.description,
+        url: (parent) => parent.url,
     }
 }
 
