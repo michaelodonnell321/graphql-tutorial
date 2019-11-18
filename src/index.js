@@ -15,6 +15,7 @@ const resolvers = {
     Query: {
         info: () => 'This is the API for the Hackernews Clone',
         feed: () => links,
+        link: () => link.id
     },
     Mutation: {
         //adds new link object, adds to existing links list, then returns the newly created link
