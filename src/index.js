@@ -4,6 +4,7 @@ const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
 const Link = require('./resolvers/Link')
+const Subscription = require('./resolvers/Subscription')
 
 //dummy data
 let links = [{
@@ -17,10 +18,12 @@ let idCount = links.length
 const resolvers = {
     //resolver needed for each typedef
     //name needs to match
+    //all imported from resolvers folder
     Query,
     Mutation,
+    Subscription,
     User,
-    Link
+    Link,
 }
 
 const server = new GraphQLServer({
