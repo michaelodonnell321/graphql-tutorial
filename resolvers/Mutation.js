@@ -39,6 +39,20 @@ async function login(parent, args, context, info) {
     }
 }
 
+//POST
+//using getUserId function to get ID of user
+//this is tored in the JWT that's set at the Authorization header of the incoming HTTP request
+//therefore, we know that user is creating the link
+//use that userId to connect the Link to the User who is creating it
+function post(parent, args, context, info) {
+    const userId = getUserId(context)
+    return context.prisma.createLink({
+        url: args.url,
+        description: args.description,
+        postedBy: { connect: { id: userId } },
+    })
+}
+
 module.exports = {
     signup,
     login,
