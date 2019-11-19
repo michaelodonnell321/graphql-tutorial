@@ -11,6 +11,10 @@ generate:
   - generator: javascript-client
     output: ../src/generated/prisma-client
 
+# this makes prisma client automatically be regenerated after a datamodel change
+hooks:
+  post-deploy:
+    - prisma generate
 # Here’s a quick explanation of each property you see in that file:
 
 # endpoint: The HTTP endpoint for your Prisma API.
