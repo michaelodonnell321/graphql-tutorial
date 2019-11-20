@@ -3,6 +3,11 @@ type Query {
     feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): [Link!]!
 }
 
+type Feed {
+    links: [Link!]!
+    count: Int!
+}
+
 type Query {
     link(id: String!): Link
 }

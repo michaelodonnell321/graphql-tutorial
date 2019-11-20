@@ -2,7 +2,7 @@
 //if there is, object is constructed that expresses the two filter conditions above
 //where arg is used by Prisma to filter out those Link elements that don't adhere
 
-async function feed(parent, args, context, info) {
+async function feed(parent, args, context) {
     const where = args.filter ? {
         OR: [
             { description_contains: args.filter },
@@ -16,7 +16,16 @@ async function feed(parent, args, context, info) {
         first: args.first,
         orderBy: args.orderBy
     })
-    return links
+    const count = await context.prisma
+        .linksConnection({
+            where,
+        })
+        .aggregate()
+        .count()
+    return {
+        links,
+        count,
+    }
 }
 
 module.exports = {
